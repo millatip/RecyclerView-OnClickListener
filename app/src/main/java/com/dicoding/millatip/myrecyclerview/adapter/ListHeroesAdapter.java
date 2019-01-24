@@ -30,18 +30,16 @@ public class ListHeroesAdapter extends RecyclerView.Adapter<ListHeroesAdapter.Ca
 
     private ArrayList<Heroes> listHeroes;
 
-    private OnHeroListener mOnHeroListener;
 
 
-    public ListHeroesAdapter(Context context, OnHeroListener onHeroListener) {
-        this.mOnHeroListener = onHeroListener;
+    public ListHeroesAdapter(Context context) {
         this.context = context;
     }
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemRow = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_heroes, parent, false);
-        return new CategoryViewHolder(itemRow, mOnHeroListener);
+        return new CategoryViewHolder(itemRow);
     }
 
     @Override
@@ -60,29 +58,18 @@ public class ListHeroesAdapter extends RecyclerView.Adapter<ListHeroesAdapter.Ca
         return getListHeroes().size();
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         TextView tvRemarks;
         ImageView imgPhoto;
-        OnHeroListener onHeroListener;
 
-        CategoryViewHolder(View itemView, OnHeroListener onHeroListener) {
+        CategoryViewHolder(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_item_name);
             tvRemarks = itemView.findViewById(R.id.tv_item_remarks);
             imgPhoto = itemView.findViewById(R.id.img_item_photo);
-            this.onHeroListener = onHeroListener;
-
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            onHeroListener.onItemClick(getAdapterPosition());
-        }
     }
 
-    public interface OnHeroListener{
-        void onItemClick(int position);
-    }
 }

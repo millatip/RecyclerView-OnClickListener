@@ -13,7 +13,7 @@ import com.dicoding.millatip.myrecyclerview.model.HeroesData;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements ListHeroesAdapter.OnHeroListener {
+public class MainActivity extends AppCompatActivity{
 
     RecyclerView rvList;
     private ArrayList<Heroes> list;
@@ -34,15 +34,9 @@ public class MainActivity extends AppCompatActivity implements ListHeroesAdapter
 
     private void showRecyclerList() {
         rvList.setLayoutManager(new LinearLayoutManager(this));
-        ListHeroesAdapter listHeroesAdapter = new ListHeroesAdapter(this, this);
+        ListHeroesAdapter listHeroesAdapter = new ListHeroesAdapter(this);
         listHeroesAdapter.setListHeroes(list);
         rvList.setAdapter(listHeroesAdapter);
     }
 
-    @Override
-    public void onItemClick(int position) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_HERO,list.get(position) );
-        startActivity(intent);
-    }
 }
